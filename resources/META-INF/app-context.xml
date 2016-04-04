@@ -46,12 +46,15 @@
 	</bean>
 	<bean id="facilityUse" class="com.online.bookstore.model.facility_use.FacilityUseImpl" scope="prototype">
 	</bean>
-	<bean id="inspectionUse" class="com.online.bookstore.model.inspections.InspectionsImpl" scope="prototype">
+	<bean id="inspection" class="com.online.bookstore.model.inspections.InspectionsImpl" scope="prototype">
+	</bean>
+	<bean id="maintRequest" class="com.online.bookstore.model.maintenance.MaintRequestImpl" scope="prototype">
 	</bean>
 	
 	<bean id="customerService" class="com.online.bookstore.model.service.CustomerService" scope="prototype"></bean>
 	<bean id="facilityService" class="com.online.bookstore.model.service.FacilityService" scope="prototype"></bean>
 	<bean id="facilityUseService" class="com.online.bookstore.model.service.FacilityUseService" scope="prototype"></bean>
 	<bean id="inspectionService" class="com.online.bookstore.model.service.InspectionService" scope="prototype"></bean>
+	<bean id="maintService" class="com.online.bookstore.model.service.MaintRequestService" scope="prototype"></bean>
 	
 </beans>

@@ -8,7 +8,7 @@ import com.online.bookstore.model.service.InspectionService;
 public class InspectionsHibernateDAO {
 	public void addInspection(Inspections inspect) {
 		System.out.println("*************** Adding inspection information in DB with ID ...  " 
-				+ inspect.getInspectionId());
+				+ inspect.getInspectId());
 		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		session.save(inspect);

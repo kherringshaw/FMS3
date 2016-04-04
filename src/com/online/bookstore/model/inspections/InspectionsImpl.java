@@ -17,7 +17,7 @@ public class InspectionsImpl implements Inspections {
 	}
 	
 	@Override
-	public int getInspectionId() {
+	public int getInspectId() {
 		return inspectId;
 	}
 	
