@@ -5,7 +5,7 @@
  
 <hibernate-mapping package="com.facility.management.model.inspections">
 	<class name="InspectionsImpl" table="inspections">
-		<id name="inspectId" column="inspectId"/>
+		<id name="inspectId" type="string" column="inspectId"/>
 		<property name="facilityId" type="int" column="facilityId"/>
 		<property name="description" type="string" column="description"/>
 	</class>

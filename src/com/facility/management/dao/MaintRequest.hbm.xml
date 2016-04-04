@@ -5,8 +5,9 @@
  
 <hibernate-mapping package="com.facility.management.model.maintenance">
 	<class name="MaintRequestImpl" table="maintenance_request">
-		<id name="maintId" column="maintenanceId"/>
+		<id name="maintId"  type="int" column="maintenanceId"/>
 		<property name="facilityId" type="int" column="facilityId"/>
+		<property name="maintDescription" type="string" column="maintDescription" />
 		<!--<property name="maintDescription" type="string" column="maint_descript"/>-->
 	</class>
 </hibernate-mapping>

@@ -5,9 +5,10 @@
  
 <hibernate-mapping package="com.facility.management.model.facility_use">
 	<class name="FacilityUseImpl" table="facility_use">
-		<id name="useId" column="useId"/>
-		<property name="facilityId" column="facilityId"/>
+		<id name="useId" type="string" column="useId"/>
+		<property name="facilityId" type="int" column="facilityId"/>
 		<property name="tenant" type="string" column="tenant"/>
+		<property name="owner" type="string" column="owner"/>
 	</class>
 	
 </hibernate-mapping>
