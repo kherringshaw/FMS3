@@ -5,6 +5,7 @@ public class FacilityUseImpl implements Facility_use {
 	private int useId;
 	private int facilityId;
 	private String tenant;
+	private String owner;
 
 	@Override
 	public int getUseId() {
@@ -34,6 +35,16 @@ public class FacilityUseImpl implements Facility_use {
 	@Override
 	public void setTenant(String tenant) {
 		this.tenant = tenant;
+	}
+	
+	@Override
+	public String getOwner() {
+		return owner;
+	}
+	
+	@Override
+	public void setOwner(String tenant) {
+		this.owner = owner;
 	}
 
 

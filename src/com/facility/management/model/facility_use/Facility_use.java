@@ -8,5 +8,7 @@ public interface Facility_use {
 	public void setFacilityId(int facilityId);
 	public	void setTenant(String tenant);
 	public String getTenant();
+	public	void setOwner(String owner);
+	public String getOwner();
 
 }

@@ -12,7 +12,6 @@ public class PersonImpl implements Person {
 	protected String state;
 	protected String zip;
 	protected String phone;
-	protected List<Facility> facList;
 	protected String type;
 	
  /*   public Person(int id, String t){
