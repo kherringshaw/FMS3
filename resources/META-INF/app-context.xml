@@ -14,6 +14,9 @@
 		<property name="facilityID" ref="facilityID" />
 		<property name="owner" ref="owner" />
 		<property name="city" ref="city" />
+		<property name="capacity" ref="capacity" />
+		<property name="rate" ref="rate" />
+		<property name="detail" ref="detail" />
 	</bean>
 	<bean id="FacilityUse" class="com.facility.management.model.facility_use.FacilityUseImpl" scope="prototype">
 		<property name="facilityID" ref="facilityID" />
@@ -30,6 +33,10 @@
 		<property name="facilityID" ref="facilityID" />
 		<property name="maintID" ref="maintID" />
 		<property name="maintDescription" ref="maintDescription" />
+		<property name="status" ref="status" />
+		<property name="cost" ref="cost" />
+		<property name="startDate" ref="startDate" />
+		<property name="endDate" ref="endDate" />
 	</bean>
 	<bean id="Person" class="com.facility.management.model.Person.PersonImpl" scope="prototype">
 		<property name="personID" ref="personID" />

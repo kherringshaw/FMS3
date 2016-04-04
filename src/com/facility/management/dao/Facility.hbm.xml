@@ -8,5 +8,8 @@
 		<id name="facilityId" type="int" column="facilityId"/>
 		<property name="owner" type="string" column="owner"/>
 		<property name="city" type="string" column="city"/>
+		<property name="capacity" type="int" column="capacity" />
+		<property name="rate" type="double" column="rate" />
+		<property name="detail" type="String" column="detail" />
 	</class>
 </hibernate-mapping>
