@@ -21,11 +21,11 @@
  		<!-- Enable Hibernate's automatic session context management -->
  		<property name="current_session_context_class">thread</property>
 		<!-- Mapping resource configuration files -->
- 		<mapping resource="com/online/bookstore/dao/Customer.hbm.xml"/> 
- 		<mapping resource="com/online/bookstore/dao/Address.hbm.xml"/> 		
- 		<mapping resource="com/online/bookstore/dao/Facility.hbm.xml"/>  
- 		<mapping resource="com/online/bookstore/dao/FacilityUse.hbm.xml"/>  
- 		<mapping resource="com/online/bookstore/dao/Inspections.hbm.xml"/> 
- 		<mapping resource="com/online/bookstore/dao/MaintRequest.hbm.xml"/>  
+ 		<mapping resource="com/facility/management/dao/Customer.hbm.xml"/> 
+ 		<mapping resource="com/facility/management/dao/Address.hbm.xml"/> 		
+ 		<mapping resource="com/facility/management/dao/Facility.hbm.xml"/>  
+ 		<mapping resource="com/facility/management/dao/FacilityUse.hbm.xml"/>  
+ 		<mapping resource="com/facility/management/dao/Inspections.hbm.xml"/> 
+ 		<mapping resource="com/facility/management/dao/MaintRequest.hbm.xml"/>  
  	</session-factory>
  </hibernate-configuration>
