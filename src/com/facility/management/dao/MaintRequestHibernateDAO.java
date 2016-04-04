@@ -7,10 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.facility.management.model.facility.Facility;
 import com.facility.management.model.maintenance.MaintRequest;
 import com.fms2.dal.DBHelper;
 import com.fms2.model.Facility_MaintReq;
@@ -18,13 +21,82 @@ import com.fms2.model.Facility_Maintenance;
 
 public class MaintRequestHibernateDAO {
 	
-	public void addMaintReq(MaintRequest maint) {
+	public void makeFacilityMaintReq(MaintRequest maint) {
 		System.out.println("*************** Adding maintenance request information in DB with ID ...  " 
 				+ maint.getMaintId());
 		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		session.save(maint);
 		session.getTransaction().commit();
+	}
+	
+	public List<MaintRequest> listMaintenanceRequests(){
+		try {
+		System.out.println("*************** querying maintenance requests ...  ");
+		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+        
+        Query listMaintQuery = session.createQuery("From MaintRequestImpl");	
+		
+		List maint = listMaintQuery.list();
+		
+		System.out.println("*************** Retrieve Query is ....>>\n" + maint.size()); 
+		
+		session.getTransaction().commit();
+		return maint;
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
+
+		
+	}
+	
+	public List<MaintRequest> listMaintenance(){
+		try {
+		System.out.println("*************** querying maintenance requests ...  ");
+		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+        
+        Query listMaintQuery = session.createQuery("From MaintRequestImpl where status=closed");	
+		
+		List maint = listMaintQuery.list();
+		
+		System.out.println("*************** Retrieve Query is ....>>\n" + maint.size()); 
+		
+		session.getTransaction().commit();
+		return maint;
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
+
+		
+	}
+	
+	public List<MaintRequest> listFacilityProblems(){
+		try {
+		System.out.println("*************** querying maintenance requests ...  ");
+		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+        
+        Query listMaintQuery = session.createQuery("From MaintRequestImpl where status=open");	
+		
+		List maint = listMaintQuery.list();
+		
+		System.out.println("*************** Retrieve Query is ....>>\n" + maint.size()); 
+		
+		session.getTransaction().commit();
+		return maint;
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
+
+		
 	}
 	
 	public void createMaintenceSchedule(int facilityId, Calendar startDate, Calendar endDate, int maintId) {

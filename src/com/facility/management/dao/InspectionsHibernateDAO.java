@@ -22,7 +22,7 @@ public class InspectionsHibernateDAO {
 	
 	public List<Facility> listFacilities(){
 		try {
-		System.out.println("*************** querying facilities ...  ");
+		System.out.println("*************** querying inspections ...  ");
 		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
         

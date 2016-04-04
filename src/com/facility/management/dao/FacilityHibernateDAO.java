@@ -17,6 +17,7 @@ import com.facility.management.dao.HibernatePGSQLHelper;
 
 
 public class FacilityHibernateDAO {
+	
 	public void addNEwFacility(Facility fac) {
 		System.out.println("*************** Adding facility in DB with ID ...  " 
 				+ fac.getFacilityId());
