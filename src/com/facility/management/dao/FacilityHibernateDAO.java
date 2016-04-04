@@ -70,67 +70,20 @@ public class FacilityHibernateDAO {
 		System.out.println("*************** Retrieve Query is ....>>\n" + getCapacityQuery.toString()); 
 		
 		List cap = getCapacityQuery.list(); //list of all columns in the facility's row
-		System.out.println("Getting Book Details using HQL. \n" + cap.get(0)); //prints only the capacity
+		System.out.println("Getting Book Details using HQL. \n" + cap.get(3)); //prints only the capacity
 		
-		System.out.println("*************** Retrieve Query is ....>>\n" + cap.get(0).toString()); 
+		System.out.println("*************** Retrieve Query is ....>>\n" + cap.get(3).toString()); 
 		
 		session.getTransaction().commit();
-		return (int)cap.get(0);
+		return (int)cap.get(3);
 		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return 0;
 	}
 		
-		
-		try {
-			Connection connection = DBHelper.getConnection();
-			Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery("SELECT * FROM facility WHERE facilityId = '" + facilityId + "'");
-			
-			List<Integer> list1 = new ArrayList();
-
-			while (rs.next()){
-				list1.add(rs.getInt(9));
-			}
-			
-			//System.out.println("what is in the list: " + list1);
-
-		     Integer sum = new Integer(0); 
-		     for (Integer i : list1) {
-		         sum = sum + i;
-		     }
-
-			return sum;
-		}
-			catch(SQLException e) {
-				System.err.println("Got an exception for calculateUsageRate! ");
-				System.err.println(e.getMessage());
-			}
-			return (Integer) null;
-		
-	}
-	
-    public void addFacilityDetail(Facility fac, int facilityId, String details) throws Exception {
-
-
-            try {
-                Connection conn = DBHelper.getConnection();
-                PreparedStatement stmt = conn.prepareStatement("UPDATE facility SET details = ? WHERE facilityId = " + facilityId);
-                stmt.setString(1, details);
-
-
-                int result = stmt.executeUpdate();
-
-                if (result == 0) {
-                    throw new SQLException("Facility_DAO: Threw a SQLException addingFacilityDetail.");
-                }
-
-            } catch (SQLException e) {
-                System.out.println("SQLException: " + e);
-            }
 
     }
 
