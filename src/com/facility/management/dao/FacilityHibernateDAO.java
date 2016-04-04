@@ -71,7 +71,7 @@ public class FacilityHibernateDAO {
 		System.out.println("*************** Retrieve Query is ....>>\n" + getCapacityQuery.toString()); 
 		
 		List cap = getCapacityQuery.list(); //list of all columns in the facility's row
-		System.out.println("Getting Book Details using HQL. \n" + cap.get(3)); //prints only the capacity
+		System.out.println("Getting facility capacity using HQL. \n" + cap.get(3)); //prints only the capacity
 		
 		System.out.println("*************** Retrieve Query is ....>>\n" + cap.get(3).toString()); 
 		
@@ -87,29 +87,56 @@ public class FacilityHibernateDAO {
 
 
 
-	public List<Facility> getFacilityDetail(int facilityId) {
+	public String getFacilityInformation(int facilityId) {
 		try {
-			Connection connection = DBHelper.getConnection();
-			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM facility");
-			
-			List<Facility> list = new ArrayList<>();
-
-			while (rs.next()){
-				list.add(new Facility(rs.getInt("facilityId"), rs.getString("details")));
-			}
-
-			return list;
+		System.out.println("*************** Searcing for detail for facility with ID ...  " + facilityId);
+		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+        
+        Query getDetailQuery = session.createQuery("From FacilityImpl where facilityId=:facilityId");		
+        getDetailQuery.setString("facilityId", (facilityId + ""));
+		
+		System.out.println("*************** Retrieve Query is ....>>\n" + getDetailQuery.toString()); 
+		
+		List details = getDetailQuery.list(); //list of all columns in the facility's row
+		System.out.println("Getting Facility Details using HQL. \n" + details.get(5));
+		
+		System.out.println("*************** Retrieve Query is ....>>\n" + details.get(5).toString()); 
+		
+		session.getTransaction().commit();
+		return (String)details.get(5);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-			catch(SQLException e) {
-				System.err.println("Facility_DAO: Threw a SQLException retrieving the facility object. ");
-				System.err.println(e.getMessage());
-			}
-			return null;
-	}
+		return "";
+		}
+	
+	public String addFacilityDetail(int facilityId, String d) {
+		try {
+		System.out.println("*************** Searcing for detail for facility with ID ...  " + facilityId);
+		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+	    
+	    Query getDetailQuery = session.createQuery("From FacilityImpl where facilityId=:facilityId");		
+	    getDetailQuery.setString("facilityId", (facilityId + ""));
+		
+		System.out.println("*************** Retrieve Query is ....>>\n" + getDetailQuery.toString()); 
+		
+		List details = getDetailQuery.list(); //list of all columns in the facility's row
+		
+		System.out.println("Getting Existing Facility Details using HQL. \n" + details.get(5)); //prints only the capacity
+		details.set(5, details.get(5) + ", " + d);
+		//System.out.println("*************** Retrieve Query is ....>>\n" + cap.get(5).toString()); 
+		
+		session.getTransaction().commit();
+		return (String)details.get(5);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+		}
 
-
-    
-    
 
 }
