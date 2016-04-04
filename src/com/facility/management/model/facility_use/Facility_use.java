@@ -1,5 +1,7 @@
 package com.facility.management.model.facility_use;
 
+import java.util.Calendar;
+
 public interface Facility_use {
 
 	public int getUseId();
@@ -10,11 +12,12 @@ public interface Facility_use {
 	public String getTenant();
 	public	void setOwner(String owner);
 	public String getOwner();
-	public double getFacilityRate();
-	public void setFacilityRate(double rate);
-	public int getFacilityCapacity();
-	public void setFacilityCapacity(int capacity);
-	public String getDetail();
+    public Calendar getStartDate();
+    public Calendar getEndDate();
+    public String getStatus();
+    public void setStartDate(Calendar start);
+    public void setEndDate(Calendar end);
+    public void setStatus(String status);
 	
 
 }

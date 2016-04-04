@@ -23,6 +23,9 @@
 		<property name="useID" ref="useID" />
 		<property name="owner" ref="owner" />
 		<property name="tenant" ref="tenant" />
+		<property name="status" ref="status" />
+		<property name="startDate" ref="startDate" />
+		<property name="endDate" ref="endDate" />
 	</bean>
 	<bean id="InspectionUse" class="com.facility.management.model.inspections.InspectionsImpl" scope="prototype">
 		<property name="facilityID" ref="facilityID" />

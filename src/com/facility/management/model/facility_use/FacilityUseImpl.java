@@ -1,11 +1,16 @@
 package com.facility.management.model.facility_use;
 
+import java.util.Calendar;
+
 public class FacilityUseImpl implements Facility_use {
 	
 	private int useId;
 	private int facilityId;
 	private String tenant;
 	private String owner;
+    private Calendar startDate;
+    private Calendar endDate;
+    private String status;
 
 	@Override
 	public int getUseId() {
@@ -43,11 +48,43 @@ public class FacilityUseImpl implements Facility_use {
 	}
 	
 	@Override
-	public void setOwner(String tenant) {
+	public void setOwner(String owner) {
 		this.owner = owner;
 	}
 
+	@Override
+	public String getStatus() {
+		return status;
+	}
+	
+	@Override
+	public void setStatus(String status) {
+		this.status = status;
+		
+	}
+	
+	
+	@Override
+	public Calendar getStartDate() {
+		return startDate;
+	}
+	
+	@Override
+	public void setStartDate(Calendar startDate) {
+		this.startDate = startDate;
+		
+	}
 
+	@Override
+	public Calendar getEndDate() {
+		return endDate;
+	}
+	
+	@Override
+	public void setEndDate(Calendar endDate) {
+		this.endDate = endDate;
+		
+	}
 	
 	
 

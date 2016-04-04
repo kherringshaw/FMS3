@@ -9,6 +9,9 @@
 		<property name="facilityId" type="int" column="facilityId"/>
 		<property name="tenant" type="string" column="tenant"/>
 		<property name="owner" type="string" column="owner"/>
+		<property name="status" type="string" column="status" />
+		<property name="startDate" type="Calendar" column="startDate" />
+		<property name="endDate" type="Calendar" column="endDate" />
 	</class>
 	
 </hibernate-mapping>
