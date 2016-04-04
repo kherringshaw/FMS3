@@ -7,17 +7,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.facility.management.model.facility.Facility;
-import com.online.bookstore.model.customer.Address;
 import com.facility.management.dao.HibernatePGSQLHelper;
 
 
 public class FacilityHibernateDAO {
-	public void addFacility(Facility fac) {
+	public void addNEwFacility(Facility fac) {
 		System.out.println("*************** Adding facility in DB with ID ...  " 
 				+ fac.getFacilityId());
 		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
@@ -25,7 +25,7 @@ public class FacilityHibernateDAO {
 		session.save(fac);
 		session.getTransaction().commit();
 	}
-	public void deleteFacility(Facility fac) {
+	public void removeFacility(Facility fac) {
 		System.out.println("*************** Deleteing facility from DB with ID ...  " + fac.getFacilityId());
 		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
@@ -34,25 +34,26 @@ public class FacilityHibernateDAO {
 		
 	}
 	
-	public List<Facility> queryFacilities(){
+	public List<Facility> listFacilities(){
 		try {
-			Connection connection = DBHelper.getConnection();
-			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM facility");
-			
-			List<Facility> list = new ArrayList<>();
-
-			while (rs.next()){
-				list.add(new Facility(rs.getInt("facilityId"), rs.getString("owner"), rs.getString("address1"), rs.getString("address2"), rs.getString("city"), rs.getString("state"), rs.getString("zip"), rs.getInt("rate"), rs.getInt("capacity")));
-			}
-
-			return list;
+		System.out.println("*************** querying facilities ...  ");
+		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+        
+        Query listFacilitiesQuery = session.createQuery("From FacilityImpl");	//gets all facilities	
+		
+		List facs = listFacilitiesQuery.list(); //list of all columns in the facility's row
+		
+		System.out.println("*************** Retrieve Query is ....>>\n" + facs.size()); 
+		
+		session.getTransaction().commit();
+		return facs;
+		
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-			catch(SQLException e) {
-				System.err.println("Facility_DAO: Threw a SQLException retrieving the facility object. ");
-				System.err.println(e.getMessage());
-			}
-			return null;
+		return Collections.emptyList();
+
 		
 	}
 
@@ -85,7 +86,6 @@ public class FacilityHibernateDAO {
 		
 
 
-    }
 
 	public List<Facility> getFacilityDetail(int facilityId) {
 		try {
