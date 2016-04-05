@@ -1,5 +1,6 @@
 package com.facility.management.dao;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -65,6 +66,54 @@ public class FacilityUseHibernateDAO {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public List<Facility_use> listActualUsage(int facilityId){
+		try {
+		System.out.println("*************** querying facility use ...  ");
+		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+        
+        Query useQuery = session.createQuery("From FacilituUseImpl where facilityId=:facilityId");	
+        useQuery.setString("facilityId", (facilityId + ""));
+		
+		List u = useQuery.list(); 
+		
+		System.out.println("*************** Retrieve Query is ....>>\n" + u.size()); 
+		
+		session.getTransaction().commit();
+		return u;
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
+
+		
+	}
+	
+	public int calcUsageRate(int facilityId){
+		try {
+		System.out.println("*************** querying facility use ...  ");
+		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+        
+        Query useQuery = session.createQuery("From FacilituUseImpl where facilityId=:facilityId");	
+        useQuery.setString("facilityId", (facilityId + ""));
+		
+		List u = useQuery.list(); 
+		
+		System.out.println("*************** Retrieve Query is ....>>\n" + u.size()); 
+		
+		session.getTransaction().commit();
+		return u.size();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+
+		
 	}
 	
 }
