@@ -99,6 +99,30 @@ public class MaintRequestHibernateDAO {
 		
 	}
 	
+	public int calcProblemRateForFacility(int facilityId){
+		try {
+		System.out.println("*************** querying maintenance requests ...  ");
+		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+        
+        Query maintQuery = session.createQuery("From MaintRequestImpl where status=open and facilityId=:facilityId");	
+        maintQuery.setString("facilityId", (facilityId + ""));
+		
+		List maint = maintQuery.list();
+		
+		System.out.println("*************** Retrieve Query is ....>>\n" + maint.size()); 
+		
+		session.getTransaction().commit();
+		return maint.size();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+
+		
+	}
+	
 	public void createMaintenceSchedule(int facilityId, Calendar startDate, Calendar endDate, int maintId) {
 
 
