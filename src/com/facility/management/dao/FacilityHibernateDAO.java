@@ -18,7 +18,7 @@ import com.facility.management.dao.HibernatePGSQLHelper;
 
 public class FacilityHibernateDAO {
 	
-	public void addNEwFacility(Facility fac) {
+	public void addNewFacility(Facility fac) {
 		System.out.println("*************** Adding facility in DB with ID ...  " 
 				+ fac.getFacilityId());
 		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
@@ -32,7 +32,6 @@ public class FacilityHibernateDAO {
 		session.beginTransaction();
 		session.delete(fac);
 		session.getTransaction().commit();
-		
 	}
 	
 	public List<Facility> listFacilities(){
@@ -84,9 +83,6 @@ public class FacilityHibernateDAO {
 		}
 		return 0;
 	}
-		
-
-
 
 	public String getFacilityInformation(int facilityId) {
 		try {
@@ -119,19 +115,13 @@ public class FacilityHibernateDAO {
 		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 	    
-	    Query getDetailQuery = session.createQuery("From FacilityImpl where facilityId=:facilityId");		
+	    Query getDetailQuery = session.createQuery("Update FacilityImpl set detail=:newDetails" + "where facilityId=:facilityId");
+	    getDetailQuery.setString("newDetails", (d));
 	    getDetailQuery.setString("facilityId", (facilityId + ""));
-		
-		System.out.println("*************** Retrieve Query is ....>>\n" + getDetailQuery.toString()); 
-		
-		List details = getDetailQuery.list(); //list of all columns in the facility's row
-		
-		System.out.println("Getting Existing Facility Details using HQL. \n" + details.get(5)); //prints only the capacity
-		details.set(5, details.get(5) + ", " + d);
-		//System.out.println("*************** Retrieve Query is ....>>\n" + cap.get(5).toString()); 
+	    getDetailQuery.executeUpdate(); 
 		
 		session.getTransaction().commit();
-		return (String)details.get(5);
+		return d;
 		
 		} catch (Exception e) {
 			e.printStackTrace();

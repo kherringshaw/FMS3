@@ -10,7 +10,7 @@ public class FacilityUseImpl implements Facility_use {
 	private String owner;
     private Calendar startDate;
     private Calendar endDate;
-    private String status;
+    private String status;  //occupied or vacant
 
 	@Override
 	public int getUseId() {
