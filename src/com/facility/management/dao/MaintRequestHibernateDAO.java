@@ -76,6 +76,33 @@ public class MaintRequestHibernateDAO {
 		
 	}
 	
+	public int calcMaintenanceCostForFacility(int facilityId){
+		try {
+		System.out.println("*************** querying maintenance requests ...  ");
+		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+        
+        Query maintQuery = session.createQuery("Select cost From MaintRequestImpl where status=closed and facilityId=:facilityId");	
+        maintQuery.setString("facilityId", (facilityId + ""));
+		
+		List maint = maintQuery.list();
+		
+		System.out.println("*************** Retrieve Query is ....>>\n" + maint.size()); 
+		int sum = 0;
+		for (int i = 0; i < maint.size(); i++) {
+			sum += (int)maint.get(i);
+		}
+		session.getTransaction().commit();
+		return sum;
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+
+		
+	}
+	
 	public List<MaintRequest> listFacilityProblems(){
 		try {
 		System.out.println("*************** querying maintenance requests ...  ");

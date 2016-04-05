@@ -116,5 +116,29 @@ public class FacilityUseHibernateDAO {
 		
 	}
 	
+	public int calcDownTimeForFacility(int facilityId, int maxUsage){
+		try {
+		System.out.println("*************** querying facility use ...  ");
+		Session session = HibernatePGSQLHelper.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+        
+        Query useQuery = session.createQuery("From FacilituUseImpl where facilityId=:facilityId");	
+        useQuery.setString("facilityId", (facilityId + ""));
+		
+		List u = useQuery.list(); 
+		
+		System.out.println("*************** Retrieve Query is ....>>\n" + u.size()); 
+		
+		session.getTransaction().commit();
+		return maxUsage-u.size();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return maxUsage;
+
+		
+	}
+	
 }
 
